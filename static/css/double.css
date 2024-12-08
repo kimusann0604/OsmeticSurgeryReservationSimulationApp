@@ -1,0 +1,124 @@
+body {
+    background-color: #CFE6EA;
+}
+
+.button-tag {
+    padding: 15px;
+    background-color: white;
+    font-size: 15px;
+    margin-left: 30px;
+    border-radius:30px;
+    
+}
+
+.tags{
+    position: absolute;
+    top: 50px;
+    left: 10px;
+    display: flex;
+    box-sizing: border-box;
+}
+
+.white-box {
+    background-color: white;
+    margin-top: 10%;
+    margin-left: 15%;
+    height: 60%;
+    width: 55%;
+    padding-bottom: 50px;
+}
+.name {
+    padding-top: 20px;
+    padding-left: 20px;
+}
+
+.sabname {
+    padding-left:20px;
+    font-size: 13px;
+    color: #A5A5A5;
+    height:20px;
+}
+
+.image-item {
+    width: 250px;
+    height: 171px;
+    padding-left: 60px;
+    
+}
+
+.sabname {
+    position: absolute;
+    top: 200px;
+    left: 190px;
+}
+
+.tags-item1 {
+    background-color: #DDBB54;
+    color: white;
+    width: 10%;
+    margin-left: 5%;
+}
+
+.tags-item2 {
+    margin-left: 10px;
+}
+
+.tags-item3 {
+    margin-left: 10px;
+    background-color:#EBE6E6 ;
+}
+
+.tags-item4 {
+    margin-left: 10px;
+    color: #F56B6B;
+}
+
+.tags-item5 {
+    margin-left: 10px;
+    background-color:#EBE6E6 ;
+}
+
+.tags-item6 {
+    margin-left: 10px;
+}
+.tags-item {
+    display: flex;
+}
+
+.asterisk {
+    position: absolute;
+    top: 450px;
+    left:560px;
+    color: #878383;
+    font-size: 13px;
+}
+
+.reservation {
+    margin-left:20%; 
+    margin-top: 5%;
+    padding-left:6%; 
+    padding-right: 6%;
+    font-size: 25px;
+    background-color:#54CFB8 ;
+    color: #fff;
+    
+}
+.button-tag.active {
+    background-color: #54CFB8; /* 好みの色に変更してください */
+    color: white; /* テキストの色を白に */
+    border: 2px solid #54CFB8; /* ボーダーの色も変更可能 */
+}
+
+.button-tag {
+    /* 既存のスタイル */
+    padding: 15px;
+    background-color: white;
+    font-size: 15px;
+    margin: 10px;
+    border-radius: 30px;
+    cursor: pointer;
+    border: 2px solid transparent; /* ボーダーを透明に */
+    transition: background-color 0.3s, color 0.3s; /* スムーズな色変化 */
+}
+
+

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="ja"> 
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Venus - 整形シミュレーター</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style3.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/sideBar.css') }}">
+    <script src="{{ url_for('static', filename='js/sideBar.js') }}" defer></script>
+</head>
+<body>
+    <div id="menuSideBar"></div>
+    
+<div id="main">
+    <h1>過去の予約</h1>
+        <div class="cautionary">※来店済み、キャンセルなどの表示に誤りがある場合、直接クリニックへお問い合わせください。</div>
+        <div class="white-box">
+            <p class="tag">来院済み</p>
+            <p class="time">2024年7月28日14:00</p>
+            <p class="name"><strong>東京中央美容外科</strong></p>
+            <p class="tipe">二重整形</p>
+            <button class="point">ポイント・クーポン</button>
+            <button class="apoint">施術報告をする</button>
+            <button class="reservation">予約詳細を見る・アクセスを見る</button>
+        </div>
+</div>
+</body>
+</html>

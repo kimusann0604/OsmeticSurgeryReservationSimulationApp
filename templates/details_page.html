@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- <link rel="stylesheet" href="sideBar.css"> -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/sideBar.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/details.css') }}">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <script>
+        const detailsPageURL = "{{ url_for('details_page') }}";
+    </script>
+    
+    <script src="{{ url_for('static', filename='js/sideBar.js') }}" defer></script>
+    <title>Document</title>
+</head>
+<body>
+    <div class="hedder">
+        <h2 class="title">二重整形</h2>
+        <p class="left-element">条件変更</p>
+        <p class="right-element">マップの表示</p>
+    </div>
+<div id="menuSideBar"></div>
+<div id="main">
+    
+</body>
+</html>

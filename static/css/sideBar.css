@@ -1,0 +1,93 @@
+/* menu Icon用開始 */
+.menuIcon {
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 48px;
+  height: 48px;
+}
+
+.menuIcon:hover {
+  background-color: #999;
+  border-radius: 50%;
+}
+/* menu Icon用終了*/
+
+/* side Bar用開始 */
+#sideBar {
+  position: fixed; /* ビューポートに固定 */
+  top: 0;
+  left: -200px; /* 初期位置は画面外 */
+  width: 200px;
+  height: 100%;
+  z-index: 100; /* カバーより上 */
+  background-color: #FFECEC;
+  transition: transform 0.3s ease; /* CSSトランジションを追加 */
+}
+
+/* サイドバーが開いた状態 */
+#sideBar.open {
+  transform: translateX(200px); /* サイドバーを画面内にスライド */
+}
+
+/* メインコンテンツのスタイル */
+#main {
+  position: relative; /* 相対位置 */
+  z-index: 99; /* カバーより上 */
+  margin-left: 200px; /* サイドバーの幅を確保 */
+  
+}
+
+#menuList {
+  position: absolute;
+  top: 60px;
+}
+
+/* coverのスタイルを調整 */
+.cover {
+  position: fixed; /* ビューポート全体を覆う */
+  top: 0;
+  left: 200px; /* サイドバーの幅 */
+  width: calc(100% - 200px); /* 残りの幅をカバー */
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0); /* 必要に応じて色と不透明度を調整 */
+  visibility: hidden;
+  opacity: 0;
+  z-index: 98;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+  pointer-events: auto; /* クリックイベントを受け取る */
+}
+
+.coverVisible {
+  visibility: visible;
+  opacity: 0.3;
+}
+
+
+/* #main {
+  position: absolute;
+  top: 60px;
+  left: 200px;
+  font-size: 2em;
+} */
+
+.menuItem {
+  width: 180px;
+  padding-left: 10px;
+  padding-right: 10px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+.menuItem:hover {
+  background-color: #ccc;
+  border-radius: 10% / 50%;  
+}
+
+.title {
+  position: absolute;
+  left: 100px;
+}
+
+
+

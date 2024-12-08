@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- <link rel="stylesheet" href="sideBar.css"> -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/sideBar.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <script src="{{ url_for('static', filename='js/sideBar.js') }}" defer></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-auth-compat.js"></script>
+    <title>Document</title>
+</head>
+<body>
+<div id="menuSideBar"></div>
+<div id="main">
+<button  class="login">ログイン</button>
+<div class="title2">
+    <div class="circle-icon">
+        <img src="{{ url_for('static', filename='image/Gemini_Generated_Image_jp4tuxjp4tuxjp4t 3.jpeg') }}" alt="画像1の説明" >
+        <!-- <img src="/Users/kimurahotaka/Documents/検索美容整形/image/Gemini_Generated_Image_jp4tuxjp4tuxjp4t 3.jpeg" alt="Cosmetic Icon"> -->
+    </div>
+        <h1 class="head">V E N U S</h1>
+</div>
+<div class="input">
+    <form action="/search" method="GET">
+        <input type="text" name="query" class="text" placeholder=施術・クリニック・ドクター名を入力>
+        <button type="submit" class="search">検索</button>
+    </form>
+    <!-- <span class="material-icons">
+        search
+        </span> -->
+</div>
+<h2 class="subtitle1">人気の施術</h2>
+<ul class="image-list">
+    <li class="image-item">
+        <img src="{{ url_for('static', filename='image/eye.png') }}" alt="画像1の説明" class="image">
+        <!-- <img src="image/eye.png" alt="画像1の説明" class="image"> -->
+        <span class="description"><strong>二重</strong><br>理想の二重でメイク時短♪</span>
+    </li>
+    <li class="image-item">
+        <img src="{{ url_for('static', filename='image/eye_cry.png') }}" alt="画像1の説明" class='image'>
+        <!-- <img src="image/eye_cry.png" alt="画像2の説明" class="image"> -->
+        <span class="description"><strong>涙袋</strong><br>ぷっくり可愛い目元に♡</span>
+    </li>
+    <li class="image-item">
+        <img src="{{ url_for('static', filename='image/hada.png') }}" alt="画像1の説明" class="image">
+        <!-- <img src="image/hada.png" alt="画像3の説明" class="image"> -->
+        <span class="description"><strong>毛穴</strong><br>黒ずみ・ぽっかり開き毛穴に</span>
+    </li>
+    <li class="image-item">
+        <img src="{{ url_for('static', filename='image/mouse.png') }}" alt="画像1の説明" class="image">
+        <!-- <img src="image/mouse.png" alt="画像4の説明" class="image"> -->
+        <span class="description"><strong>口元</strong><br>長年の悩みからの解放！</span>
+    </li>
+</ul>
+
+<ul class="image-list">
+    <li class="image-item">
+        <img src="{{ url_for('static', filename='image/nose.png') }}" alt="画像1の説明" class="image">
+        <!-- <img src="image/nose.png" alt="画像1の説明" class="image"> -->
+        <span class="description"><strong>小鼻</strong><br>大きさ・張り出しを解消！</span>
+    </li>
+    <li class="image-item">
+        <img src="{{ url_for('static', filename='image/stomach.png') }}" alt="画像1の説明" class="image">
+        <!-- <img src="image/stomach.png" alt="画像2の説明" class="image"> -->
+        <span class="description"><strong>痩身(上半身)</strong><br>華蓄な二の腕・くびれ！</span>
+    </li>
+    <li class="image-item">
+        <img src="{{ url_for('static', filename='image/teeth.png') }}" alt="画像1の説明" class="image">
+        <!-- <img src="image/teeth.png" alt="画像3の説明" class="image"> -->
+        <span class="description"><strong>白い歯</strong><br>笑顔が映えて清潔感アップ！</span>
+    </li>
+    <li class="image-item">
+        <img src="{{ url_for('static', filename='image/yokogao.png') }}" alt="画像1の説明" class="image">
+        <!-- <img src="image/yokogao.png" alt="画像4の説明" class="image"> -->
+        <span class="description"><strong>横顔</strong><br>どの角度も綺麗に盛れる</span>
+    </li>
+</ul>
+<!-- <h2 class="subtitle3">近くのクリニック</h2>
+<ul class="clinic">
+    <li class="clinic2">
+        <div class="box"></div>
+    </li>
+    <li class="clinic2">
+        <div class="box"></div>
+    </li>
+    <li class="clinic2">
+        <div class="box"></div>
+    </li> -->
+</ul>
+</div>
+</div>
+</body>
+</html>

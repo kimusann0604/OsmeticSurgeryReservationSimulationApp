@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- <link rel="stylesheet" href="sideBar.css"> -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/sideBar.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/double.css') }}">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <script>
+        const detailsPageURL = "{{ url_for('details_page') }}";
+    </script>
+    
+    <script src="{{ url_for('static', filename='js/sideBar.js') }}" defer></script>
+    <script src="{{ url_for('static', filename='js/procedureSwitcher.js') }}" defer></script>
+    <title>Document</title>
+</head>
+<body>
+<div id="menuSideBar"></div>
+<div id="main">
+    <h2>施術を見つける</h2>
+    <div class="tags">
+        <button class="button-tag" data-procedure="futemaibotsu"><strong>二重埋没</strong></button>
+        <button class="button-tag" data-procedure="shizenYuchaku"><strong>自然癒着法</strong></button>
+        <button class="button-tag" data-procedure="kamabutaShibou"><strong>上まぶたの脂肪取り</strong></button>
+        <button class="button-tag" data-procedure="futaeSekkai"><strong>二重切開</strong></button>
+        <button class="button-tag" data-procedure="mayushitaSekkai"><strong>眉下切開</strong></button>
+        <button class="button-tag" data-procedure="gankenSekkai"><strong>眼瞼下垂(切開)</strong></button>
+        <button class="button-tag" data-procedure="gannkenhissekkai"><strong>眼瞼下垂(非切開)</strong></button>
+    </div>
+    <div id="procedure-container"></div>
+    <!-- <div class="white-box">
+    <div class="names">
+        <h2 class="name">二重埋没</h2>
+        <p class="sabname">ふたえまいぼつ</p>
+    </div>
+    <img src="{{ url_for('static', filename='image/2ba0ea3106656216a12b1f1689bbb0c9.jpg') }}" alt="画像1の説明" class="image-item">
+    <img src="{{ url_for('static', filename='image/スクリーンショット 2024-11-28 11.31.03.png') }}" alt="画像1の説明" class="image-item">
+    <div class="tags-item">
+    <p class="tags-item1">人気No.1</p>
+    <p class="tags-item2">糸・埋没</p>
+    <p class="tags-item3">平均価格</p>
+    <p class="tags-item4">13.8万円</p>
+    <p class="tags-item5">ダウンタイム</p>
+    <p class="tags-item6">3〜7日</p>
+    </div>
+    <p class="asterisk">※平均価格は掲載中のメニューの合計から集計</p>
+    <button class="reservation">解説・口コミ・メニューを見る</button>
+    </div>
+</div>
+</body>
+</html>
+
+double_eyelid_surgery.html -->

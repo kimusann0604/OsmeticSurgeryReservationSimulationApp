@@ -1,0 +1,115 @@
+.circle-icon {
+    width: 100px; /* サイズ調整 */
+    height: 100px; /* サイズ調整 */
+    border-radius: 50%; /* 丸くする */
+    overflow: hidden;
+    display: inline-block;
+}
+
+.circle-icon img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; }
+button.login{
+    float: right;
+    padding: 8px;
+    width: 8%;
+    border-radius: 10px;
+    margin-right: 3%;
+}
+.login {
+    background-color: #fff;
+
+}
+.title2 {
+    align-items: center; 
+    display: flex;
+    justify-content: center;
+    height: 30vh;
+    margin-right: 15%;
+    
+}
+.head {
+    margin-left: 1%;
+    margin-right: 2%;
+}
+.input {
+    display: flex;
+    justify-content: center;
+    margin-top: -50px;
+    margin-left: 30%;
+}
+.input form{
+    display: flex;
+    align-items: center;
+    width: 100%;
+}
+.text {
+    padding: 15px;
+    width: 30%;
+    border-radius: 10px;
+    margin-right: 1.5%;
+    font-size: 15px;
+}
+
+button.search{
+    padding: 10px;
+    width : 90px;
+    border-radius: 10px;
+    
+}
+.search {
+    font-size: 18px;
+    background-color: #FFDBBC;
+    border: none;
+}
+
+.image-list {
+    list-style: none; /* デフォルトのリストスタイルを削除 */
+    padding: 0;
+    margin: 0;
+    display: flex;
+  }
+  
+  /* 各リスト項目のスタイル */
+  .image-item {
+    display: flex; /* Flexboxを使用 */
+    align-items: center; /* 垂直方向の中央揃え */
+    margin-bottom: 15px; /* 項目間のスペース */
+    border: 1px solid #333;
+    border-radius: 8px; 
+    margin-left: 5px;
+  }
+  
+  /* 画像のスタイル */
+  .image {
+    width: 100px; /* 画像の幅を指定 */
+    height: 100px; /* 画像の高さを指定 */
+    object-fit: cover; /* 画像の切り取り方法 */
+    margin-right: 10px; /* 画像とテキストの間のスペース */
+    border-radius: 5px; /* 画像の角を丸くする（オプション） */
+  }
+  
+  /* 説明文のスタイル */
+  .description {
+    font-size: 1em; /* フォントサイズ */
+    color: #333; /* テキストカラー */
+  }
+
+  .box {
+    margin       : auto;
+    width        : 300px;
+    height       : 150px;
+    background   : linear-gradient(to bottom, #99ccff, #0059b3);
+    
+  }
+
+ .clinic {
+    display: flex;
+ }
+ .clinic2 {
+    list-style: none;
+    margin-right: 10%;
+
+ }
+  

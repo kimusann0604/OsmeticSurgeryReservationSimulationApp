@@ -1,0 +1,8 @@
+<?xml version="1.0" standalone="no"?>
+<svg width="32px" height="32px" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" version="1.1">
+  <title>Example humberger icon</title>
+  <desc>Example humberger icon</desc>
+  <path d="M9 10 L24 10" stroke="black" stroke-width="2"/>
+  <path d="M9 16 L24 16" stroke="black" stroke-width="2" />
+  <path d="M9 22 L24 22" stroke="black" stroke-width="2" />
+</svg>

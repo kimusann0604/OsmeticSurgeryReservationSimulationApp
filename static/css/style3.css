@@ -1,0 +1,87 @@
+body {
+    background-color: #E6E3E3;
+}
+.white-box {
+        width: 400px;
+        height:270px;
+        background-color: #fff;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+        display: flex; /* 中央揃えのためにFlexboxを使用 */
+        align-items: center; /* 縦方向に中央揃え */
+        justify-content: center; /* 横方向に中央揃え */
+        text-align: center; /* テキストを中央揃え */
+        position: absolute;
+        top:300%;
+        left:30%;
+    }
+
+.tag   {
+    position: absolute;
+    top: 10px;
+    left:20px;
+    background-color: #B7B5B5;
+    color:#FFFFFF;
+    font-size: 20px;
+    
+}
+.main {
+    justify-content: center; /* 水平に中央配置 */
+    align-items: center; /* 垂直に中央配置 */
+}
+
+.cautionary {
+    position: absolute;
+    top: 100%;
+    left:10%;
+}
+.time {
+    position: absolute;
+    top:3%;
+    left:40%;
+
+}
+
+.tipe {
+    position: absolute;
+    top:20%;
+    left:25px;
+    background-color: #AFFAFF;
+    color:#4CADAF;
+}
+
+.name {
+    position: absolute;
+    top:20%;
+    left:35%;
+    font-size: 20px;
+}
+.point {
+    position: absolute;
+    top:50%;
+    left:10%;
+    background-color: #78D6D6;
+    color: #FFFFFF;
+    border: none;
+}
+
+.apoint{
+    position: absolute;
+    top:50%;
+    left:55%;
+    border: none;
+    background-color: #FF8686;
+    color: #FFFFFF;
+}
+
+.reservation {
+    position: absolute;
+    top: 70%;
+    border-color: #5AC6C4;
+    background-color: #FFFFFF;
+    color: #63CBCB;
+    box-shadow: none;
+}
+
+
