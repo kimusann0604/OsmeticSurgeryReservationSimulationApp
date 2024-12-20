@@ -3,16 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- <link rel="stylesheet" href="sideBar.css"> -->
     <link rel="stylesheet" href="{{ url_for('static', filename='css/sideBar.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/details.css') }}">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <script>
         const detailsPageURL = "{{ url_for('details_page') }}";
     </script>
-    
     <script src="{{ url_for('static', filename='js/sideBar.js') }}" defer></script>
-    <title>Document</title>
+    <title>クリニック一覧</title>
 </head>
 <body>
     <div class="hedder">
@@ -20,8 +18,31 @@
         <p class="left-element">条件変更</p>
         <p class="right-element">マップの表示</p>
     </div>
-<div id="menuSideBar"></div>
-<div id="main">
+    <div id="menuSideBar"></div>
+    <div id="main">
+        <div>
+            {% for item in data %}
+                <div>
+                    <!-- クリニック名をタイトルに表示 -->
+                    <h2>{{ item.clinic_name }}</h2>
+                    
+                    <!-- 画像を表示 -->
+                    <img src="{{ item.ImageUrl }}" alt="{{ item.clinic_name }}" style="width:300px;">
+                    
+                    <!-- クリニックの住所を表示 -->
+                    <p>住所: {{ item.clinic_address }}</p>
+                    
+                    <!-- 定休日を表示 -->
+                    <p>定休日: {{ item.closed_day }}</p>
     
+                    <!-- 予約フォーム -->
+                    <form action="/reservation" method="POST">
+                        <input type="hidden" name="clinic_name" value="{{ item.clinic_name }}">
+                        <button type="submit">予約する</button>
+                    </form>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
 </body>
 </html>

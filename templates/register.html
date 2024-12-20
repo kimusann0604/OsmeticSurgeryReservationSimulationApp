@@ -1,0 +1,86 @@
+<!-- templates/register.html -->
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>ユーザー登録ページ</title>
+  <!-- Firebase SDKの読み込み（互換性レイヤーを使用） -->
+  <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-auth-compat.js"></script>
+</head>
+<body>
+
+<div>
+    <h1>ユーザー登録</h1>
+    <input type='text' id='email' placeholder='メールアドレス'/>
+    <br/>
+    <input type='password' id='password' placeholder='パスワード'/>
+    <br/>
+    <input type='password' id='confirmPassword' placeholder='パスワード（確認）'/>
+    <br/>
+    <button onclick="register()">登録</button>
+    <h2 style="color:orangered;" id="msg"></h2>
+</div>
+
+<script>
+  // Firebaseの設定（Firebaseコンソールから取得した情報を正確に記入）
+  const firebaseConfig = {
+    apiKey: "AIzaSyC8c08c4UmefpEQr2tzRfMMRId_gQf_8l4",
+    authDomain: "example-bc073.firebaseapp.com",
+    projectId: "example-bc073",
+    storageBucket: "example-bc073.appspot.com",  // 修正点
+    messagingSenderId: "251450844500",
+    appId: "1:251450844500:web:3719c9c0d7762607a8d4c1",
+    measurementId: "G-3PKDEKB5E8"
+  };
+
+  // Firebaseを初期化
+  firebase.initializeApp(firebaseConfig);
+  const auth = firebase.auth();
+
+  function register() {
+    const email = document.getElementById('email').value;
+    const password = document.getElementById('password').value;
+    const confirmPassword = document.getElementById('confirmPassword').value;
+
+    // パスワードの確認
+    if (password !== confirmPassword) {
+      document.getElementById('msg').innerText = 'パスワードが一致しません。';
+      return;
+    }
+
+    // ユーザー登録
+    auth.createUserWithEmailAndPassword(email, password)
+      .then((userCredential) => {
+        // 登録成功
+        return userCredential.user.getIdToken();
+      })
+      .then((idToken) => {
+        // IDトークンをサーバーに送信
+        return fetch('/register', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({ idToken: idToken })
+        });
+      })
+      .then(response => response.json())
+      .then(data => {
+        if (data.success) {
+          // 登録成功、ホームページにリダイレクト
+          window.location.href = '/';
+        } else {
+          document.getElementById('msg').innerText = data.message;
+        }
+      })
+      .catch((error) => {
+        // エラー処理
+        document.getElementById('msg').innerText = error.message;
+        console.error('登録エラー:', error);
+      });
+  }
+</script>
+
+</body>
+</html>

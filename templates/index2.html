@@ -9,21 +9,25 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='css/sideBar.css') }}">
     <script src="{{ url_for('static', filename='js/sideBar.js') }}" defer></script>
 </head>
+<style >
+    .clinic-block{
+        background: #fff;
+    }
+</style>
 <body>
     <div id="menuSideBar"></div>
     
-<div id="main">
-    <h1>過去の予約</h1>
-        <div class="cautionary">※来店済み、キャンセルなどの表示に誤りがある場合、直接クリニックへお問い合わせください。</div>
-        <div class="white-box">
-            <p class="tag">来院済み</p>
-            <p class="time">2024年7月28日14:00</p>
-            <p class="name"><strong>東京中央美容外科</strong></p>
-            <p class="tipe">二重整形</p>
-            <button class="point">ポイント・クーポン</button>
-            <button class="apoint">施術報告をする</button>
-            <button class="reservation">予約詳細を見る・アクセスを見る</button>
+    <div id="main">
+        <h1 style="text-align: center;">過去の予約</h1>
+        <div class="clinics-container">
+            {% for reservation in reservations %}
+                <div class="clinic-block">
+                    <h2>{{ reservation.clinic_name }}</h2>
+                    <p>予約日時: {{ reservation.reservation_date }}</p>
+                    <p>ステータス: {{ reservation.status }}</p>
+                </div>
+            {% endfor %}
         </div>
-</div>
+    </div>
 </body>
 </html>

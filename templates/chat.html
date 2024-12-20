@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chat Room</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style4.css') }}">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.0/socket.io.min.js"></script>
+</head>
+<body>
+    <div id="chat-container">
+        <div id="messages"></div>
+        <input id="message-input" autocomplete="off">
+        <button onclick="sendMessage()">Send</button>
+    </div>
+
+    <script>
+        var socket = io();
+
+        // 固定チャットルームID（必要なら動的に設定）
+        const chatRoomId = "room123";
+
+        // チャット履歴を取得して表示
+        window.onload = function() {
+            fetch(`/chat-history/${chatRoomId}`)
+                .then(response => response.json())
+                .then(data => {
+                    var messages = document.getElementById('messages');
+                    data.forEach(item => {
+                        var message = document.createElement('div');
+                        message.classList.add('message', 'other');
+                        message.textContent = `${item.timestamp}: ${item.message}`;
+                        messages.appendChild(message);
+                    });
+                    messages.scrollTop = messages.scrollHeight;
+                })
+                .catch(err => console.error("チャット履歴取得エラー:", err));
+        };
+
+        // メッセージを送信
+        function sendMessage() {
+            var input = document.getElementById('message-input');
+            var msg = input.value;
+            if (msg.trim() === '') return;
+
+            // 自分のメッセージを追加
+            var messages = document.getElementById('messages');
+            var message = document.createElement('div');
+            message.classList.add('message', 'self');
+            message.textContent = msg;
+            messages.appendChild(message);
+            messages.scrollTop = messages.scrollHeight;
+
+            // サーバーにメッセージを送信
+            socket.emit('message', { chat_room_id: chatRoomId, message: msg });
+            input.value = '';
+        }
+
+        // 他のユーザーのメッセージを受信
+        socket.on('message', function(data) {
+            if (data.chat_room_id === chatRoomId) {
+                var messages = document.getElementById('messages');
+                var message = document.createElement('div');
+                message.classList.add('message', 'other');
+                message.textContent = `${data.timestamp}: ${data.message}`;
+                messages.appendChild(message);
+                messages.scrollTop = messages.scrollHeight;
+            }
+        });
+    </script>
+</body>
+</html>

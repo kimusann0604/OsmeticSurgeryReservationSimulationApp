@@ -36,7 +36,7 @@ window.addEventListener("DOMContentLoaded", () => {
     document.getElementById("reservation").addEventListener("click", () => {
         toggleSideBar();
         setTimeout(() => {
-            location.href = "/reservation";
+            location.href = "reservations";
         }, 300);
     });
 
