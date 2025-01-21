@@ -1,5 +1,17 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/sideBar.css') }}">
+
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <script src="{{ url_for('static', filename='js/sideBar.js') }}" defer></script>
+  <title>Home</title>
+
     <body>
+        <div id="menuSideBar"></div>
+        <div id="main">
         {% if img_data %}
 	    <IMG SRC="{{ img_data }}" alt="Processed Image" />
         {% endif %}
@@ -14,5 +26,7 @@
         <input type="file" name="example" accept="image/*">
         <input type="submit" value="アップロード">
     </form>
+</div>
+</div>
 </body>
 </html>

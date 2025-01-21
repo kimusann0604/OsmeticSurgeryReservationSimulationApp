@@ -12,10 +12,13 @@
     object-fit: cover; }
 button.login{
     float: right;
-    padding: 8px;
+    padding: 20px;
     width: 8%;
     border-radius: 10px;
     margin-right: 3%;
+    border: 10px;
+    background-color: #bad6f1;
+    font-size: 13px;
 }
 .login {
     background-color: #fff;
