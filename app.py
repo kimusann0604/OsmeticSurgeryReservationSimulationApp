@@ -160,33 +160,40 @@ def simulate():
 @app.route('/process-image', methods=['GET', 'POST'])
 def process_image():
     if request.method == 'GET':
-        return render_template('results.html')
+        return render_template('results.html', img_data=None, original_img=None, result=None)
 
     elif request.method == 'POST':
         try:
             if 'example' not in request.files:
-                return render_template('results.html', img_data=None, result="ファイルがアップロードされていません")
+                return render_template('results.html', img_data=None, original_img=None, result="ファイルがアップロードされていません")
 
             file = request.files['example']
             if file.filename == '':
-                return render_template('results.html', img_data=None, result="ファイルが選択されていません")
+                return render_template('results.html', img_data=None, original_img=None, result="ファイルが選択されていません")
 
-            file_path = '/tmp/uploaded_image.jpg'
-            file.save(file_path)
+            # 元画像の保存パス
+            original_path = '/tmp/original_image.jpg'
+            file.save(original_path)
 
-            image = cv2.imread(file_path)
+            # 元画像をテンプレートに渡すためにBase64エンコード
+            with open(original_path, "rb") as img_file:
+                original_base64 = base64.b64encode(img_file.read()).decode('utf-8')
+            original_img_uri = f"data:image/jpeg;base64,{original_base64}"
+
+            # OpenCVで画像を読み込む
+            image = cv2.imread(original_path)
             if image is None:
-                return render_template('results.html', img_data=None, result="画像が見つかりません。")
+                return render_template('results.html', img_data=None, original_img=original_img_uri, result="画像が見つかりません。")
 
             # 鼻のRGB色を取得
             original_color = face_rbg(image)
             if original_color is None:
-                return render_template('results.html', img_data=None, result="鼻の領域の色が計算できませんでした。")
+                return render_template('results.html', img_data=None, original_img=original_img_uri, result="鼻の領域の色が計算できませんでした。")
 
             # 明るさを調整
             processor = EyeLandmarkProcessor()
             face_mesh = processor.initialize_face_mesh()
-            img_rgb = processor.image_path(file_path)
+            img_rgb = processor.image_path(original_path)
             factor = 0.2
             darker_color = adjust_brightness(original_color, factor)
 
@@ -199,35 +206,39 @@ def process_image():
                 _, buffer = cv2.imencode('.png', blended_img)
                 img_base64 = base64.b64encode(buffer).decode('utf-8')
                 img_data_uri = f"data:image/png;base64,{img_base64}"
-                return render_template('results.html', img_data=img_data_uri, result="処理が完了しました")
+                return render_template('results.html', img_data=img_data_uri, original_img=original_img_uri)
             else:
-                return render_template('results.html', img_data=None, result="処理結果がありません。")
+                return render_template('results.html', img_data=None, original_img=original_img_uri, result="処理結果がありません。")
         except Exception as e:
-            return render_template('results.html', img_data=None, result=f"エラーが発生しました: {str(e)}")
-
+            return render_template('results.html', img_data=None, original_img=None, result=f"エラーが発生しました: {str(e)}")
 
 
 @app.route('/eye-process', methods=['GET', 'POST'])
 def process():
     if request.method == 'GET':
-        return render_template('results2.html', img_data=None, result="ファイルをアップロードしてください")
+        return render_template('results2.html', img_data=None, original_img=None, result="ファイルをアップロードしてください")
     
     try:
         if 'example' not in request.files:
-            return render_template('results2.html', img_data=None, result="ファイルがアップロードされていません")
+            return render_template('results2.html', img_data=None, original_img=None, result="ファイルがアップロードされていません")
 
         file = request.files['example']
         if file.filename == '':
-            return render_template('results2.html', img_data=None, result="ファイルが選択されていません")
+            return render_template('results2.html', img_data=None, original_img=None, result="ファイルが選択されていません")
         
+        # 元画像のBase64エンコード
         image_bytes = file.read()
+        original_img_base64 = base64.b64encode(image_bytes).decode('utf-8')
+        original_img_uri = f"data:image/jpeg;base64,{original_img_base64}"
         
+        # AWS認証情報の取得
         aws_access_key_id = os.getenv('AWS_ACCESS_KEY_ID')
         aws_secret_access_key = os.getenv('AWS_SECRET_ACCESS_KEY')
         
         if not aws_access_key_id or not aws_secret_access_key:
-            return render_template('results2.html', img_data=None, result="AWS認証情報が設定されていません")
+            return render_template('results2.html', img_data=None, original_img=original_img_uri, result="AWS認証情報が設定されていません")
         
+        # 画像処理
         processor = PtosisCorrection(
             aws_access_key_id=aws_access_key_id,
             aws_secret_access_key=aws_secret_access_key
@@ -235,14 +246,16 @@ def process():
         
         processed_image = processor.process_image(image_bytes)
         
+        # 加工画像のBase64エンコード
         _, buffer = cv2.imencode('.png', processed_image)
         img_base64 = base64.b64encode(buffer).decode('utf-8')
         img_data_uri = f"data:image/png;base64,{img_base64}"
         
-        return render_template('results2.html', img_data=img_data_uri, result="画像処理が完了しました")
+        return render_template('results2.html', img_data=img_data_uri, original_img=original_img_uri, result="画像処理が完了しました")
     
     except Exception as e:
-        return render_template('results2.html', img_data=None, result=f"エラーが発生しました: {str(e)}")
+        return render_template('results2.html', img_data=None, original_img=None, result=f"エラーが発生しました: {str(e)}")
+
 
   # DynamoDBのテーブル名
 

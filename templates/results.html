@@ -1,32 +1,34 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <link rel="stylesheet" href="{{ url_for('static', filename='css/sideBar.css') }}">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style5.css') }}">
+  <title>結果</title>
+</head>
+<body>
+  <h3>画像をアップロード</h3>
+  <form action="/process-image" method="POST" enctype="multipart/form-data">
+    <input type="file" name="example" accept="image/*" required>
+    <input type="submit" value="アップロード">
+  </form>
 
-  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-  <script src="{{ url_for('static', filename='js/sideBar.js') }}" defer></script>
-  <title>Home</title>
+  <hr>
+  <div class="flex">
+  <h3>元画像</h3>
+  {% if original_img %}
+  <img src="{{ original_img }}" alt="Uploaded Image" style="max-width: 100%; height: auto;">
+  {% else %}
+  <p>元画像がありません。</p>
+  {% endif %}
 
-    <body>
-        <div id="menuSideBar"></div>
-        <div id="main">
-        {% if img_data %}
-	    <IMG SRC="{{ img_data }}" alt="Processed Image" />
-        {% endif %}
-
-        {% if img_data %}
-        <div class="message">{{ result }}</div> 
-        <hr>
-        {% endif %}
-        <h3>画像をアップロード</h3>
-    
-    <form action="/process-image" method="POST" enctype="multipart/form-data">
-        <input type="file" name="example" accept="image/*">
-        <input type="submit" value="アップロード">
-    </form>
-        </div>
-    </div>
+  <h3>加工後の画像</h3>
+  {% if img_data %}
+  <img src="{{ img_data }}" alt="Processed Image" style="max-width: 100%; height: auto;">
+  {% else %}
+</div>
+  <p>加工後の画像がありません。</p>
+  {% endif %}
+  
 </body>
 </html>
