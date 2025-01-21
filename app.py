@@ -114,7 +114,7 @@ def reservation():
             Item={
                 'clinic_name': clinic_name,
                 'reservation_date': reservation_date,
-                'status': 'pendig'
+                'status': 'カウンセリング'
             }
         )
     else:

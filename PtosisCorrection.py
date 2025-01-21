@@ -69,7 +69,7 @@ class PtosisCorrection:
             eye_points = result['landmarks']
             
             # 目の周辺領域の調整用パラメータ
-            padding_x, padding_y = 20, 5
+            padding_x, padding_y = 15, 5
             
             # 左目の処理
             left_coords = {

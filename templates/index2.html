@@ -8,12 +8,35 @@
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style3.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/sideBar.css') }}">
     <script src="{{ url_for('static', filename='js/sideBar.js') }}" defer></script>
+    <style>
+        .clinic-block {
+            background: #fff;
+            padding: 20px;
+            margin-bottom: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+
+        .clinic-block h2, .clinic-block p {
+            margin: 0;
+            margin-bottom: 10px;
+        }
+
+        .clinic-button {
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .clinic-button:hover {
+            background-color: #0056b3;
+        }
+    </style>
 </head>
-<style >
-    .clinic-block{
-        background: #fff;
-    }
-</style>
+
 <body>
     <div id="menuSideBar"></div>
     
@@ -25,9 +48,16 @@
                     <h2>{{ reservation.clinic_name }}</h2>
                     <p>予約日時: {{ reservation.reservation_date }}</p>
                     <p>ステータス: {{ reservation.status }}</p>
+                    <button class="clinic-button" onclick="goToUrl('https://chat-q6rg.onrender.com')">詳細を見る</button>
                 </div>
             {% endfor %}
         </div>
     </div>
+
+    <script>
+        function goToUrl(url) {
+            window.location.href = url;
+        }
+    </script>
 </body>
 </html>
