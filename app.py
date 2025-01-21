@@ -5,7 +5,7 @@ import os
 from io import BytesIO
 from PIL import Image
 import base64
-from FaceLandmarkProcessor import FaceLandmarkProcessor
+from FaceLandmarkProcessor import EyeLandmarkProcessor
 from PtosisCorrection import PtosisCorrection
 from functools import wraps
 import boto3
@@ -15,6 +15,8 @@ from flask_socketio import SocketIO, emit
 from boto3.dynamodb.conditions import Key
 import requests
 from flask_session import Session
+import dlib
+from imutils import face_utils
 
 
 
@@ -29,6 +31,50 @@ socketio = SocketIO(app)
 app.config['SESSION_TYPE'] = 'filesystem'  # ファイルにセッションを保存
 app.config['SESSION_PERMANENT'] = False
 Session(app)
+
+
+def adjust_brightness(original_color, factor):
+    r, g, b = original_color
+    r = max(0, int(r * factor))
+    g = max(0, int(g * factor))
+    b = max(0, int(b * factor))
+    return (r, g, b)
+
+# 顔検出と鼻のRGB値を計算する関数
+def face_rbg(image):
+    detector = dlib.get_frontal_face_detector()
+    predictor = dlib.shape_predictor('/Users/kimurahotaka/Documents/profile/a/register/shape_predictor_68_face_landmarks.dat 3')
+
+    gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
+    faces = detector(gray)
+    if len(faces) == 0:
+        print("顔が検出されませんでした。")
+        return None
+
+    for face in faces:
+        shape = predictor(gray, face)
+        shape = face_utils.shape_to_np(shape)
+
+        # 鼻の領域の座標を計算
+        nose_points = shape[[28, 29, 30, 31, 32, 33, 34, 35, 36]]
+        x_coords = nose_points[:, 0]
+        y_coords = nose_points[:, 1]
+        x_min = max(0, np.min(x_coords) - 5)
+        y_min = max(0, np.min(y_coords) - 5)
+        x_max = min(image.shape[1], np.max(x_coords) + 5)
+        y_max = min(image.shape[0], np.max(y_coords) + 5)
+
+        nose_roi = image[y_min:y_max, x_min:x_max]
+
+        if nose_roi.size > 0:
+            average_b = np.mean(nose_roi[:, :, 0])
+            average_g = np.mean(nose_roi[:, :, 1])
+            average_r = np.mean(nose_roi[:, :, 2])
+            return (int(average_r), int(average_g), int(average_b))
+
+    print("鼻の領域が抽出されませんでした。")
+    return None
+
 
 def login_required(f):
     @wraps(f)
@@ -119,43 +165,46 @@ def process_image():
     elif request.method == 'POST':
         try:
             if 'example' not in request.files:
-                return render_template('results.html', img_data=None, result="ファイルがアップロードされていない")
-                
+                return render_template('results.html', img_data=None, result="ファイルがアップロードされていません")
+
             file = request.files['example']
             if file.filename == '':
-                return render_template('results.html', img_data=None, result="ファイルが選択されていない")
+                return render_template('results.html', img_data=None, result="ファイルが選択されていません")
 
-            image_bytes = file.read()
-            
-            aws_access_key_id = os.getenv('AWS_ACCESS_KEY_ID')
-            aws_secret_access_key = os.getenv('AWS_SECRET_ACCESS_KEY')
-            if not aws_access_key_id or not aws_secret_access_key:
-                return render_template('results.html', img_data=None, result="AWS認証情報が設定されていません")
+            file_path = '/tmp/uploaded_image.jpg'
+            file.save(file_path)
 
-            face_processor = FaceLandmarkProcessor(
-                aws_access_key_id=aws_access_key_id,
-                aws_secret_access_key=aws_secret_access_key
+            image = cv2.imread(file_path)
+            if image is None:
+                return render_template('results.html', img_data=None, result="画像が見つかりません。")
+
+            # 鼻のRGB色を取得
+            original_color = face_rbg(image)
+            if original_color is None:
+                return render_template('results.html', img_data=None, result="鼻の領域の色が計算できませんでした。")
+
+            # 明るさを調整
+            processor = EyeLandmarkProcessor()
+            face_mesh = processor.initialize_face_mesh()
+            img_rgb = processor.image_path(file_path)
+            factor = 0.2
+            darker_color = adjust_brightness(original_color, factor)
+
+            # ランドマークを処理し、結果画像を生成
+            blended_img = processor.process_landmarks_and_create_mask(
+                face_mesh, img_rgb, image.copy(), image, color=darker_color
             )
-            response = face_processor.detect_faces_landmark(image_bytes)
-            
-            image = Image.open(BytesIO(image_bytes))
-            image_np = np.array(image)
-            image_np = cv2.cvtColor(image_np, cv2.COLOR_RGB2BGR)
 
-            if 'FaceDetails' in response and len(response['FaceDetails']) > 0:
-                height, width = image_np.shape[:2]
-                face_processor.draw_landmarks(image_np, response['FaceDetails'], height, width)
-
-                _, buffer = cv2.imencode('.png', image_np)
+            if blended_img is not None:
+                _, buffer = cv2.imencode('.png', blended_img)
                 img_base64 = base64.b64encode(buffer).decode('utf-8')
                 img_data_uri = f"data:image/png;base64,{img_base64}"
-
-                return render_template('results.html', img_data=img_data_uri, result="顔認識処理が完了しました")
+                return render_template('results.html', img_data=img_data_uri, result="処理が完了しました")
             else:
-                return render_template('results.html', img_data=None, result="顔が認識できませんでした。")
-        
+                return render_template('results.html', img_data=None, result="処理結果がありません。")
         except Exception as e:
             return render_template('results.html', img_data=None, result=f"エラーが発生しました: {str(e)}")
+
 
 
 @app.route('/eye-process', methods=['GET', 'POST'])
