@@ -6,7 +6,7 @@ Flask-Cors==5.0.0
 Flask-SocketIO==5.5.0
 requests==2.32.2
 Flask-Session==0.8.0
-dlib==19.24.4
+dlib==19.22.1
 dlid==0.1.6
 imutils==0.5.4
 mediapipe==0.10.14
