@@ -12,9 +12,9 @@ body {
 }
 
 .tags{
-    position: absolute;
+    /* position: absolute;
     top: 50px;
-    left: 10px;
+    left: 10px; */
     display: flex;
     box-sizing: border-box;
 }
@@ -47,9 +47,10 @@ body {
 }
 
 .sabname {
-    position: absolute;
+    /* position: absolute;
     top: 200px;
-    left: 190px;
+    left: 190px; */
+    margin-top: -20px;
 }
 
 .tags-item1 {
@@ -86,11 +87,9 @@ body {
 }
 
 .asterisk {
-    position: absolute;
-    top: 450px;
-    left:560px;
     color: #878383;
     font-size: 13px;
+    margin-left: 50%;
 }
 
 .reservation {

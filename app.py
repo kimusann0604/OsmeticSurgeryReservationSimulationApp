@@ -2,8 +2,6 @@ from flask import Flask, render_template, redirect, session, url_for, jsonify, r
 import cv2
 import numpy as np
 import os
-from io import BytesIO
-from PIL import Image
 import base64
 from FaceLandmarkProcessor import EyeLandmarkProcessor
 from PtosisCorrection import PtosisCorrection
