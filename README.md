@@ -44,9 +44,9 @@ Dynamodb Cognito S3 Rekognition
 ### 予約 メッセージ機能
 https://github.com/user-attachments/assets/d77ff0bf-1767-4300-a4ce-781ce75659e3
 ### シミュレーション
-<strong>二重整形<strong><br>
-https://github.com/user-attachments/assets/ee928446-b7cf-4ffd-85c8-1b2b1e2a6c24
-<strong>眼瞼下垂<strong><br>
+### 二重整形
+https://github.com/user-attachments/assets/ee928446-b7cf-4ffd-85c8-1b2b1e2a6c24 
+### 眼瞼下垂
 https://github.com/user-attachments/assets/1668b113-7254-47c9-8058-77b437a306b3
 
 
