@@ -20,7 +20,7 @@ Flask React
 Dynamodb Cognito S3 Rekognition
 
 ## 全体図
-<img width="757" alt="スクリーンショット 2025-07-03 13 14 54" src="https://github.com/user-attachments/assets/d9429730-b318-494a-8dd1-acd9a0dbcf4c" />
+<img width="757" alt="スクリーンショット 2025-07-03 13 14 54" src="https://github.com/user-attachments/assets/d9429730-b318-494a-8dd1-acd9a0dbcf4c" /><br>
 ## シミュレーション
 <img width="757" alt="スクリーンショット 2025-07-03 13 17 52" src="https://github.com/user-attachments/assets/a30c8729-66e4-4a4d-9c15-99f086f31874" />
 
