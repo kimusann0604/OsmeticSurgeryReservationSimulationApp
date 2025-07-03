@@ -13,10 +13,13 @@
 
 ## 技術スタック
 - <strong>言語<strong><br>
+
 Python javascript HTML CSS
 - <strong>フレームワーク<strong><br>
+
 Flask React
 - <strong>クラウドサービス<strong><br>
+
 Dynamodb Cognito S3 Rekognition
 
 ## 全体図
