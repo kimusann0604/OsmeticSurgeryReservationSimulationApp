@@ -16,17 +16,17 @@
 - <strong>言語<strong><br>
 
 Python javascript HTML CSS
-- <strong>フレームワーク<strong><br>
+- フレームワーク<br>
 
 Flask React
-- <strong>クラウドサービス<strong><br>
+- クラウドサービス<br>
 
 Dynamodb Cognito S3 Rekognition
 
 ## 全体図
 <img width="757" alt="スクリーンショット 2025-07-03 13 14 54" src="https://github.com/user-attachments/assets/d9429730-b318-494a-8dd1-acd9a0dbcf4c" /><br>
 ## シミュレーション
-<img width="757" alt="スクリーンショット 2025-07-03 13 17 52" src="https://github.com/user-attachments/assets/a30c8729-66e4-4a4d-9c15-99f086f31874" />
+<img width="757" alt="スクリーンショット 2025-07-03 13 17 52" src="https://github.com/user-attachments/assets/a30c8729-66e4-4a4d-9c15-99f086f31874" /><br>
 
 ## 苦労したところ
 
@@ -34,7 +34,7 @@ Dynamodb Cognito S3 Rekognition
 2. 何一つ理解しないまま学校に入ったので、理解が難しかった
 3. 実装の仕方がわからず、日本人で実装している人がいなかった
 
-##　改善方法
+## 改善方法
 
 1. 毎日パソコンを触るという目標を立てることで、自然とパソコンを触る時間や、プログラミングを勉強する時間を取ることができた。
 2. 知識を広めるために様々なITのイベントに参加することで、技術力や知見を広げることができた。技術で不明な点があれば積極的に先輩に聞きに行き、毎日放課後に居残ることによって賞を受賞することができた
